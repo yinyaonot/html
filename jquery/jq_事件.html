@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style type="text/css">
+        #music li{
+            float: right;
+            width: 30%;
+        }
+        #content{
+            display: none;
+            float: left;
+            width: 30%;
+            height: 1000px ;
+            background: blue;
+        }
+        #music{
+            background: yellow;
+        }
+
+    </style>
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            // const URL = 'http://api.apiopen.top/searchMusic?name=不要说话'
+            // 第一步 给搜索按钮设置监听
+            // 第二步 获取用户输入的文本信息
+            // 第三步 根据用户输入的内容动态的请求服务器获取数据
+            // 3.1 >
+
+            let api_url = 'http://api.apiopen.top/searchMusic?name=';
+            // 绑定点击事件
+            $('#btn').on('click', function () {
+                // 获取用户输入信息
+                let keyword = $('#search').val();
+                // 弹出信息
+                // alert(keyword)
+                let xhr = new XMLHttpRequest();
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState === 4 && xhr.status === 200) {
+                        // 获取json数据
+                        let musics = JSON.parse(xhr.responseText);
+                        if (musics.code === 200) {
+                            // 清空子元素,避免一直追加
+                            let $music_ul = $('#music').empty();
+                            for (let music of musics.result) {
+                                $music_ul.append(
+                                    $('<li>')
+                                        .append(
+                                            $('<img>').attr('src', music.pic)
+                                        )
+                                        .append(
+                                            $('<span>').text(music.author)
+                                        )
+                                        .append(
+                                            $('<span>').text(music.title)
+                                        )
+                                        .append(
+                                            $('<a>').attr('href', music.url).text('点击播放')
+                                        )
+                                )
+
+                            }
+                            // $('#music>li').mouseout(function () {
+                            //
+                            //
+                            // });
+                            // $('#music>li').mouseover(function () {
+                            //     $('#content').css('display', 'block');
+                            //     $(this).css('background', 'red');
+                            // });
+                        }
+                    }
+
+                };
+                // get请求参数可以追加,
+                // 如果是post请求,参数不能这么设置
+                xhr.open('get', api_url + keyword);
+                xhr.send();
+                // 相当于hover,获取焦点
+
+            });
+
+            // 简写方式
+            $('#btn').click(function () {
+
+            });
+
+
+        });
+
+
+    </script>
+</head>
+<body>
+<!--用户做了什么事情触发了行为-->
+<div id="main">
+    <!--<form action="" method="get">-->
+    <!--<input type="text" id="search">-->
+    <!--<input type="submit">-->
+    <!--</form>-->
+
+    <input type="text" id="search">
+    <input type="button" id="btn" value="search">
+    <ul id="music">
+        <!--<li>-->
+        <!--<img src="" alt="">-->
+        <!--<span>歌名</span>-->
+        <!--</li>-->
+    </ul>
+    <div id="content">
+
+    </div>
+</div>
+</body>
+</html>
