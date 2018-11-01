@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            // 核心方法 通用方法 原生ajax方法的封装
+            // 参数一 ,url地址
+            // 参数二,配置参数,对象
+            // 1.发生变化的 url地址 获取数据成功后的回调
+            // 2. 获取服务器返回的json数据
+            // 3.解析json数据
+            // 4.传递的数据可能不一样
+            // 5.请求服务器的方式 get post put delete
+            let params= {
+                name: '不会说话',
+                page: 1,
+                size: 10
+            };
+            params.size=20;
+            // 配置参数
+            settings = {
+                // 必须是http请求,固定的方式,默认get
+                url: '',
+                type: 'get',
+                // 向服务起发送请求的参数,可以是对象,也可以是字符串
+
+                data: params,
+                // 返回解析好的数据
+                success:function (result) {
+
+                }
+
+            };
+
+            $.ajax(settings);
+            $.get();
+            $.post();
+            $.getJSON();
+            // 加载本地文件,摸板
+            $.load();
+
+        });
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>
