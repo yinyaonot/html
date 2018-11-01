@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <!--<script type="text/javascript" src="js/jquery-3.3.1.js"></script>-->
+    <!--<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.js"></script>-->
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            const URL = 'http://api.apiopen.top/getTangPoetry?page=1&count=20';
+            $.get(URL,function (results) {
+                for (let poem of results ) {
+
+                }
+            })
+
+        });
+    </script>
+
+</head>
+<body>
+<div id="main">
+    <ul id="content">
+        <!--<li>-->
+            <!--<div>title</div>-->
+            <!--<div>authors</div>-->
+            <!--<div>-->
+                <!--<span>1</span>-->
+                <!--<span>2</span>-->
+                <!--<span>3</span>-->
+                <!--<span>4</span>-->
+            <!--</div>-->
+        <!--</li>-->
+
+    </ul>
+</div>
+</body>
+</html>
