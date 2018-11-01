@@ -1,0 +1,91 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.js"></script>
+    <!--<link href="css/bootstrap.css" rel="stylesheet" type="text/css">-->
+    <!--<style type="text/css">-->
+        <!--#hot > li {-->
+            <!--width: 25%;-->
+            <!--float: left;-->
+            <!--padding: 10px;-->
+        <!--}-->
+
+        <!--#hot > li > p {-->
+            <!--overflow: hidden;-->
+            <!--white-space: nowrap;-->
+            <!--text-overflow: ellipsis;-->
+        <!--}-->
+
+        <!--#hot > li > img {-->
+            <!--border: 1px solid transparent;-->
+            <!--width: 100%;-->
+        <!--}-->
+    <!--</style>-->
+    <script type="text/javascript" src="js/jquery-3.3.1.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            /**
+             * ctrl + shift + u  大小写切换
+             */
+            const TOP_URL = 'https://www.apiopen.top/novelApi';
+            let xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    //获取服务器返回的json数据
+                    let json_str = xhr.responseText;
+                    //把json数据转化js对象
+                    let obj = JSON.parse(json_str);
+                    if (obj.code === 200) {
+                        //获取父类元素ul
+                        let $hot_ul = $('#hot');
+                        //    obj.data  要显示在界面上的数据   他是一个数组
+                        for (let book of obj.data) {
+                            //    根据数据动态创建元素
+                            $('<li>')
+                            // li添加子元素a标签
+                                .append(
+                                    //    添加img元素
+                                    $('<img>').attr('src', book.book_cover)
+                                )
+                                .append(
+                                    //    添加p标签
+                                    $('<span>').text(book.bookname)
+                                )
+                                .append(
+                                    $('<p>').text(book.introduction)
+                                )
+                                //将li添加到ul中
+                                .appendTo($hot_ul)
+                        }
+
+                    } else {
+                        alert('网络异常!!!请刷新界面')
+                    }
+                }
+            };
+            xhr.open('get', TOP_URL);
+            xhr.send();
+        })
+        // $.get(function (reslut) {
+
+        // })
+    </script>
+</head>
+<body>
+<div class="container-fluid">
+    <ul id="hot" class="clearfix">
+        <!--<li><a href=""><img src="" alt="">-->
+        <!--<p>标题</p>-->
+        <!--<p>简介</p>-->
+        <!--</a>>-->
+        <!--</li>-->
+    </ul>
+</div>
+
+
+</body>
+</html>
